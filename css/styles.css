@@ -20,12 +20,16 @@ header {
   color: #72ecfa;
 }
 
+h1, h2{
+  text-shadow: 2px 2px #ecfa72;
+}
+
 h1{
   font-size: 2.5vw;
 }
 
 h2 {
-  font-size: 2vw;
+  font-size: 2.25vw;
 }
 
 img{
@@ -102,10 +106,45 @@ nav ul li:hover > ul {
 
 .about{
   background: rgba(94, 85, 84, .5);
-  margin: 5% 30% 0 10%;
+  margin: 0 0 0 10%;
+  position: relative;
+  top: 5%;
+  float: left;
+  width: 60%;
 }
 
-h3 {
-  font-size: 1.5vw;
+h3, h4, h5 {
   font-family: 'Nunito';
+}
+
+h3{
+  font-size: 2vw;
+}
+
+h4 {
+  font-size: 1.75vw;
+}
+
+h5 {
+  font-size: 1.5vw;
+}
+
+h6 {
+  font-size: 1.25vw;
+}
+
+aside{
+  float: right;
+  clear: right;
+  display: inline-block;
+  font-family: 'Merriweather';
+  width: 20%;
+  margin-right: 5%;
+  background: rgba(94, 85, 84, .5);
+  margin-top: 2.5%;
+  padding: 1%;
+}
+
+aside ul{
+  list-style: none;
 }
