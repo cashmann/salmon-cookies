@@ -1,0 +1,111 @@
+body {
+  background: rgb(250,128,114);
+  margin: 0;
+}
+
+.logo, header {
+  position: relative;
+  width: 50%;
+  max-height: 15%;
+  margin: 0 auto;
+  font-family: 'Bungee Inline';
+  text-align: center;
+}
+
+header {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 7.5%;
+  color: #72ecfa;
+}
+
+h1{
+  font-size: 2.5vw;
+}
+
+h2 {
+  font-size: 2vw;
+}
+
+img{
+  width:100%;
+  display: block;
+  top: 7.5%
+}
+
+nav {
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 100%;
+  padding: 0;
+  background: #7f72fa;
+  border: outset 5px #72ecfa;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+nav ul {
+  margin-left: 20%;
+  margin-right: 10%;
+  padding: 0;
+  height: 35px;
+  background: #7f72fa;
+}
+
+nav ul a {
+  color: #ecfa72;
+  display: block;
+  line-height: 35px;
+  text-decoration: none;
+  font-size: 2vw;
+  width: 100%;
+  font-family: 'Bungee Inline';
+}
+
+nav ul li{
+  float: left;
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 20%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+nav ul ul {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  padding: 0;
+  background: linear-gradient(#7f72fa, #72ecfa);
+  border: outset 5px #72ecfa;
+  border-top: none;
+  border-radius: 0 0 50% 50%;
+  padding-bottom: 10%;
+}
+
+nav ul ul li {
+  width: 25%;
+}
+
+nav ul ul a{
+  line-height: 120%;
+  text-align: center;
+}
+
+nav ul li:hover > ul {
+  display: block;
+}
+
+.about{
+  background: rgba(94, 85, 84, .5);
+  margin: 5% 30% 0 10%;
+}
+
+h3 {
+  font-size: 1.5vw;
+  font-family: 'Nunito';
+}
