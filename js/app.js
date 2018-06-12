@@ -1,262 +1,90 @@
 'use strict';
 
-var day = prompt('Enter the day of the week.')
+var day = prompt('Enter the day of the week.');
+var weekdayHours = ['9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'];
+var satHours = ['11am', '12pm', '1pm', '2pm', '3pm', '4pm'];
 
-var locationA = {
-  address: '1st and Pike',
-  min: 23,
-  max: 65,
-  aveSold: 6.3,
-  soldHourly: [],
+function Venue(address, min, max, aveSold){
+  if (arguments.length<3) {console.error('Address, min, max, and aveSold are required!');}
+  this.address = address;
+  this.min = min;
+  this.max = max;
+  this.aveSold = aveSold;
+  this.soldHourly = [];
+}
 
-  simCustPerHour: function(){
-    var max = this.max;
-    var min = this.min;
-    return Math.ceil(Math.random()*(max-min)+min);
-  },
-
-  simSoldPerHour: function(){
-    return Math.ceil(this.aveSold*this.simCustPerHour());
-  },
-
-  simSold: function(){
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i = 0; i<=hours; i++){
-      this.soldHourly[i] = this.simSoldPerHour();
-    }
-    return this.soldHourly;
-  },
-
-  simSoldPerDay: function(){
-    var soldPerDay = 0;
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i=0; i<hours; i++){
-      soldPerDay += this.simSoldPerHour();
-      console.log(soldPerDay);
-    }
-    return soldPerDay;
-  }
+Venue.prototype.simCustPerHour = function(){
+  var max = this.max;
+  var min = this.min;
+  return Math.ceil(Math.random()*(max-min)+min);
 };
 
-var locationB = {
-  address: 'SeaTac Airport',
-  min: 3,
-  max: 24,
-  aveSold: 1.2,
-  soldHourly: [],
-
-  simCustPerHour: function(){
-    var max = this.max;
-    var min = this.min;
-    return Math.ceil(Math.random()*(max-min)+min);
-  },
-
-  simSoldPerHour: function(){
-    return Math.ceil(this.aveSold*this.simCustPerHour());
-  },
-
-  simSold: function(){
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i = 0; i<=hours; i++){
-      this.soldHourly[i] = this.simSoldPerHour();
-    }
-    return this.soldHourly;
-  },
-
-  simSoldPerDay: function(){
-    var soldPerDay = 0;
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i=0; i<hours; i++){
-      soldPerDay += this.simSoldPerHour();
-      console.log(soldPerDay);
-    }
-    return soldPerDay;
-  }
+Venue.prototype.simSoldPerHour = function(){
+  return Math.ceil(this.aveSold*this.simCustPerHour());
 };
 
-var locationC = {
-  address: 'Seattle Center',
-  min: 11,
-  max: 38,
-  aveSold: 3.7,
-  soldHourly: [],
-
-  simCustPerHour: function(){
-    var max = this.max;
-    var min = this.min;
-    return Math.ceil(Math.random()*(max-min)+min);
-  },
-
-  simSoldPerHour: function(){
-    return Math.ceil(this.aveSold*this.simCustPerHour());
-  },
-
-  simSold: function(){
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i = 0; i<=hours; i++){
-      this.soldHourly[i] = this.simSoldPerHour();
-    }
-    return this.soldHourly;
-  },
-
-  simSoldPerDay: function(){
-    var soldPerDay = 0;
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i=0; i<hours; i++){
-      soldPerDay += this.simSoldPerHour();
-      console.log(soldPerDay);
-    }
-    return soldPerDay;
+Venue.prototype.simSold = function(){
+  if (day.toUpperCase().trim()==='SATURDAY'){
+    var hours = satHours;
+  }else if (day.toUpperCase().trim()==='SUNDAY'){
+    hours = 0;
+  } else{
+    hours = weekdayHours;
   }
+  for (var i = 0; i<hours.length; i++){
+    this.soldHourly[i] = this.simSoldPerHour();
+  }
+  return this.soldHourly;
 };
 
-var locationD = {
-  address: 'Capitol Hill',
-  min: 20,
-  max: 38,
-  aveSold: 2.3,
-  soldHourly: [],
-
-  simCustPerHour: function(){
-    var max = this.max;
-    var min = this.min;
-    return Math.ceil(Math.random()*(max-min)+min);
-  },
-
-  simSoldPerHour: function(){
-    return Math.ceil(this.aveSold*this.simCustPerHour());
-  },
-
-  simSold: function(){
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i = 0; i<=hours; i++){
-      this.soldHourly[i] = this.simSoldPerHour();
-    }
-    return this.soldHourly;
-  },
-
-  simSoldPerDay: function(){
-    var soldPerDay = 0;
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i=0; i<hours; i++){
-      soldPerDay += this.simSoldPerHour();
-      console.log(soldPerDay);
-    }
-    return soldPerDay;
+Venue.prototype.simSoldPerDay = function(){
+  var soldPerDay = 0;
+  for (var i=0; i<hours; i++){
+    soldPerDay += this.simSoldPerHour();
+    console.log(soldPerDay);
   }
+  return soldPerDay;
 };
 
-var locationE = {
-  address: 'Alki',
-  min: 2,
-  max: 16,
-  aveSold: 4.6,
-  soldHourly: [],
+var locationA = new Venue('1st and Pike', 23, 65, 6.3);
+var locationB = new Venue('SeaTac Airport', 3, 24, 1.2);
+var locationC = new Venue('Seattle Center', 11, 38, 3.7);
+var locationD = new Venue('Capitol Hill', 20, 38, 2.3);
+var locationE = new Venue('Alki', 2, 16, 4.6);
 
-  simCustPerHour: function(){
-    var max = this.max;
-    var min = this.min;
-    return Math.ceil(Math.random()*(max-min)+min);
-  },
-
-  simSoldPerHour: function(){
-    return Math.ceil(this.aveSold*this.simCustPerHour());
-  },
-
-  simSold: function(){
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i = 0; i<=hours; i++){
-      this.soldHourly[i] = this.simSoldPerHour();
-    }
-    return this.soldHourly;
-  },
-
-  simSoldPerDay: function(){
-    var soldPerDay = 0;
-    if (day.toUpperCase().trim()==='SATURDAY'){
-      var hours = 4;
-    }else if (day.toUpperCase().trim()==='SUNDAY'){
-      hours = 0;
-    } else{
-      hours = 8;
-    }
-    for (var i=0; i<hours; i++){
-      soldPerDay += this.simSoldPerHour();
-      console.log(soldPerDay);
-    }
-    return soldPerDay;
-  }
-};
 
 var hours = [];
 if (day.toUpperCase().trim()==='SATURDAY'){
-  hours = ['11am', '12pm', '1pm', '2pm', '3pm', '4pm'];
+  hours = satHours;
 } else if (day.toUpperCase().trim()!=='SUNDAY'){
-  hours = ['9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'];
+  hours = weekdayHours;
+}
+document.getElementById('dynamic').colSpan = hours.length;
+
+var hoursEl = document.getElementById('hours');
+for(var i=0; i<hours.length; i++){
+  var td = document.createElement('td');
+  td.textContent = hours[i];
+  hoursEl.appendChild(td);
 }
 
-function storeData(location, id){
-  var locationList = document.getElementById(id);
-  for(var i=0; i<location.simSold().length; i++){
-    var li = document.createElement('li');
-    var listString = hours[i]+": " + location.simSold()[i] + " cookies.";
-    li.textContent = listString;
-    locationList.appendChild(li);
+function storeData(venue, id){
+  var venueList = document.getElementById(id);
+  var sold = venue.simSold();
+  var total = 0;
+  for(var i=0; i<sold.length; i++){
+    var td = document.createElement('td');
+    var soldString = sold[i];
+    td.textContent = soldString;
+    venueList.appendChild(td);
   }
+  var tl = document.createElement('td');
+  tl.className = 'total';
+  for( i=0; i<sold.length; i++){
+    total = total + sold[i];
+  }
+  tl.textContent = total;
+  venueList.appendChild(tl);
 }
 
 storeData(locationA, 'a');
