@@ -148,3 +148,10 @@ aside{
 aside ul{
   list-style: none;
 }
+
+table{
+  border-collapse: collapse;
+}
+table th, table td {
+  border: 1px solid black;
+}
