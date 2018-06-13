@@ -79,6 +79,12 @@ var venueE = new Venue('Alki', 2, 16, 4.6, 'e');
 
 Venue.prototype.render = function(){
   var id = this.venueId;
+  var venueDisplay = document.querySelector('#venueDisplay');
+  var tr = document.createElement('tr');
+  tr.id = id;
+  tr.innerHTML = '<td>' + this.address + '</td>';
+  venueDisplay.appendChild(tr);
+
   var venueList = document.getElementById(id);
   var sold = this.simSold();
  
