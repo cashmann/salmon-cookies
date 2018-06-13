@@ -7,12 +7,15 @@
     <table>
       <thead>
         <tr>
-          <th rowspan="8">Locations</th>
+          <td></td>
           <td></td>
           <th id='dynamic'>Times</th>
-          <th>Totals</th>
+          <th rowspan="2">Daily Location Totals</th>
         </tr>
+      </thead>
+      <tbody>
         <tr id='hours'>
+          <th rowspan="8">Locations</th>
           <td></td>
         </tr>
         <tr id='a'>
@@ -30,7 +33,13 @@
         <tr id='e'>
           <td>Alki</td>
         </tr>
-      </thead>
+      </tbody>
+      <tfoot>
+        <tr id='bottomTotals'>
+          <td></td>
+          <th>Totals</th>
+        </tr>
+      </tfoot>
     </table>
     </section>
     <script src='js/app.js'></script>
