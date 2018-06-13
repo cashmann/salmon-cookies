@@ -19,6 +19,8 @@ for(var i=0; i<hours.length; i++){
   hoursEl.appendChild(td);
 }
 
+Venue.all = [];
+
 function Venue(address, min, max, aveSold, venueId){
   if (arguments.length<5) {console.error('Address, min, max, and aveSold are required!');}
   this.address = address;
@@ -27,7 +29,29 @@ function Venue(address, min, max, aveSold, venueId){
   this.aveSold = aveSold;
   this.venueId = venueId;
   this.soldHourly = [];
+
+  Venue.all.push(this);
 }
+
+var venueA = new Venue('1st and Pike', 23, 65, 6.3, 'a');
+var venueB = new Venue('SeaTac Airport', 3, 24, 1.2, 'b');
+var venueC = new Venue('Seattle Center', 11, 38, 3.7, 'c');
+var venueD = new Venue('Capitol Hill', 20, 38, 2.3, 'd');
+var venueE = new Venue('Alki', 2, 16, 4.6, 'e');
+
+
+Venue.renderAll = function(){
+  resetTotalSoldPerHour();
+  var venueTr = document.getElementById('venueDisplay');
+  venueTr.innerHTML = '';
+
+  for(var i=0; i<Venue.all.length; i++){
+    Venue.all[i].render();
+  }
+  var venueBottomTotalsTr = document.getElementById('bottomTotals');
+  venueBottomTotalsTr.innerHTML = '<th>Totals</th>';
+  venueA.renderTotals();
+};
 
 Venue.prototype.simCustPerHour = function(){
   var max = this.max;
@@ -39,10 +63,12 @@ Venue.prototype.simSoldPerHour = function(){
   return Math.ceil(this.aveSold*this.simCustPerHour());
 };
 
-if(day.toUpperCase().trim()=== 'SATURDAY'){
-  Venue.prototype.totalSoldPerHour = [0, 0, 0, 0, 0, 0];
-}else if(day.toUpperCase().trim()!== 'SUNDAY'){
-  Venue.prototype.totalSoldPerHour = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+function resetTotalSoldPerHour(){
+  if(day.toUpperCase().trim()=== 'SATURDAY'){
+    Venue.prototype.totalSoldPerHour = [0, 0, 0, 0, 0, 0];
+  }else if(day.toUpperCase().trim()!== 'SUNDAY'){
+    Venue.prototype.totalSoldPerHour = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  }
 }
 
 Venue.prototype.simSold = function(){
@@ -69,13 +95,6 @@ Venue.prototype.simSoldPerDay = function(){
   }
   return soldPerDay;
 };
-
-var venueA = new Venue('1st and Pike', 23, 65, 6.3, 'a');
-var venueB = new Venue('SeaTac Airport', 3, 24, 1.2, 'b');
-var venueC = new Venue('Seattle Center', 11, 38, 3.7, 'c');
-var venueD = new Venue('Capitol Hill', 20, 38, 2.3, 'd');
-var venueE = new Venue('Alki', 2, 16, 4.6, 'e');
-
 
 Venue.prototype.render = function(){
   var id = this.venueId;
@@ -125,6 +144,23 @@ Venue.prototype.renderTotals = function(){
   venueList.appendChild(tl);
 };
 
+function handleSubmit(event){
+  event.preventDefault();
+
+  var address = event.target.address.value;
+  var min = event.target.custMin.value;
+  var max = event.target.custMax.value;
+  var aveSold = event.target.aveSold.value;
+  var venueId = event.target.venueId.value;
+
+  var newVenue = new Venue(address, min, max, aveSold, venueId);
+  Venue.renderAll();
+}
+
+var form = document.querySelector('form');
+form.addEventListener('submit', handleSubmit);
+
+resetTotalSoldPerHour();
 venueA.render();
 venueB.render();
 venueC.render();
