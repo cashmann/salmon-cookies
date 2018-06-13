@@ -21,13 +21,12 @@ for(var i=0; i<hours.length; i++){
 
 Venue.all = [];
 
-function Venue(address, min, max, aveSold, venueId){
+function Venue(address, min, max, aveSold){
   if (arguments.length<5) {console.error('Address, min, max, and aveSold are required!');}
   this.address = address;
   this.min = min;
   this.max = max;
   this.aveSold = aveSold;
-  this.venueId = venueId;
   this.soldHourly = [];
 
   Venue.all.push(this);
@@ -96,8 +95,25 @@ Venue.prototype.simSoldPerDay = function(){
   return soldPerDay;
 };
 
+function getValuesAndTotals(sold, venueList){
+  var total = 0;
+  for(var i=0; i<sold.length; i++){
+    var td = document.createElement('td');
+    var soldString = sold[i];
+    td.textContent = soldString;
+    venueList.appendChild(td);
+  }
+  var tl = document.createElement('td');
+  tl.className = 'total';
+  for( i=0; i<sold.length; i++){
+    total = total + sold[i];
+  }
+  tl.textContent = total;
+  venueList.appendChild(tl);
+}
+
 Venue.prototype.render = function(){
-  var id = this.venueId;
+  var id = this.address;
   var venueDisplay = document.querySelector('#venueDisplay');
   var tr = document.createElement('tr');
   tr.id = id;
@@ -106,42 +122,16 @@ Venue.prototype.render = function(){
 
   var venueList = document.getElementById(id);
   var sold = this.simSold();
- 
-  var total = 0;
-  for(var i=0; i<sold.length; i++){
-    var td = document.createElement('td');
-    var soldString = sold[i];
-    td.textContent = soldString;
-    venueList.appendChild(td);
-  }
-  var tl = document.createElement('td');
-  tl.className = 'total';
-  for( i=0; i<sold.length; i++){
-    total = total + sold[i];
-  }
-  tl.textContent = total;
-  venueList.appendChild(tl);
+
+  getValuesAndTotals(sold, venueList);
 };
 
 Venue.prototype.renderTotals = function(){
   var id = 'bottomTotals';
   var venueList = document.getElementById(id);
   var sold = this.totalSoldPerHour;
- 
-  var total = 0;
-  for(var i=0; i<sold.length; i++){
-    var td = document.createElement('td');
-    var soldString = sold[i];
-    td.textContent = soldString;
-    venueList.appendChild(td);
-  }
-  var tl = document.createElement('td');
-  tl.className = 'total';
-  for( i=0; i<sold.length; i++){
-    total = total + sold[i];
-  }
-  tl.textContent = total;
-  venueList.appendChild(tl);
+
+  getValuesAndTotals(sold, venueList);
 };
 
 function handleSubmit(event){
@@ -151,19 +141,22 @@ function handleSubmit(event){
   var min = event.target.custMin.value;
   var max = event.target.custMax.value;
   var aveSold = event.target.aveSold.value;
-  var venueId = event.target.venueId.value;
 
-  var newVenue = new Venue(address, min, max, aveSold, venueId);
+  var newVenue = new Venue(address, min, max, aveSold);
   Venue.renderAll();
 }
 
 var form = document.querySelector('form');
 form.addEventListener('submit', handleSubmit);
 
-resetTotalSoldPerHour();
-venueA.render();
-venueB.render();
-venueC.render();
-venueD.render();
-venueE.render();
-venueA.renderTotals();
+function startSimulation(){
+  resetTotalSoldPerHour();
+  venueA.render();
+  venueB.render();
+  venueC.render();
+  venueD.render();
+  venueE.render();
+  venueA.renderTotals();
+}
+
+startSimulation();
