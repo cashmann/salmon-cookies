@@ -120,14 +120,12 @@ Venue.prototype.render = function(){
   var id = this.address;
   var venueDisplay = document.querySelector('#venueDisplay');
   var tr = document.createElement('tr');
-  tr.id = id;
   tr.innerHTML = '<td>' + this.address + '</td>';
   venueDisplay.appendChild(tr);
 
-  var venueList = document.getElementById(id);
   var sold = this.simSold();
 
-  getValuesAndTotals(sold, venueList);
+  getValuesAndTotals(sold, tr);
 };
 
 Venue.prototype.renderTotals = function(){
