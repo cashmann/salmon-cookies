@@ -2,6 +2,7 @@
   <head>
     <title>Sales</title>
     <link rel='stylesheet' type='text/css' href='css/styles.css'>
+    <link rel='stylesheet' type='text/css' href='css/forms.css'>
     <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Merriweather|Nunito" rel="stylesheet">
   </head>
   <body onload="startSimulation">
@@ -14,7 +15,7 @@
         </header>
         <nav>
             <ul>
-              <li><a href='#'>MENU</a></li>
+              <li><a href='index.html'>MENU</a></li>
               <li><a href='#'>ORDER NOW</a>
                 <ul>
                   <li>COMING SOON</li>
@@ -34,11 +35,11 @@
           </nav>
     <form>
       <fieldset>
-        <label>Address <input type='text' name='address' autofocus required/></label><br>
-        <label>Minimum Customers per Hour <input type='number' name='custMin' required/></label><br>
-        <label>Maximum Customers per Hours <input type='number' name='custMax' required/></label><br>
-        <label>Average Cookies Sold per Customer <input type='number' name='aveSold' required/></label><br><br><br>
-        <input type='submit' value='Create Venue'/>
+        <label>Address <input type='text' name='address' autofocus required/></label>
+        <label>Minimum Customers per Hour <input type='number' name='custMin' required/></label>
+        <label>Maximum Customers per Hours <input type='number' name='custMax' required/></label>
+        <label>Average Cookies Sold per Customer <input type='number' name='aveSold' required/></label>
+        <input class='button' type='submit' value='Create Venue'/>
       </fieldset>
     </form>
     <table>
@@ -62,6 +63,7 @@
       </tfoot>
     </table>
     </section>
+    <footer></footer>
     <script src='js/app.js'></script>
   </body>
 </html>
