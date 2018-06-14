@@ -119,7 +119,7 @@ nav ul li:hover > ul {
 
 .about img{
   float: right;
-  width: 50%
+  width: 40%;
 }
 
 h3, h4, h5 {
@@ -142,6 +142,10 @@ h5 {
 
 h6 {
   font-size: 1.25vw;
+}
+
+p {
+  padding-right: 10%;
 }
 
 aside{
@@ -171,7 +175,7 @@ table th, table td {
   margin: 0 auto;
   background: rgba(250,128,114, .9);
   width: 80%;
-  height: 1500px;
+  height: 1800px;
 }
 
 footer img{
